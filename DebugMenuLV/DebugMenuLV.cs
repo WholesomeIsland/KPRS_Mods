@@ -17,9 +17,9 @@ namespace DebugMenuLV
         private void Awake()
         {
             configEnableLog = Config.Bind<bool>("General", "EnableDebugLog", false, "Enables debug messages from the game. Logging.UnityLogListening must be enabled in the main BepInEx config.");
-            configFixDLCMenu = Config.Bind<bool>("General", "FixDLCMenu", true, "Fixes the DLC menu in the debug menu so that it properly enables/disables DLC costumes.");
+            //configFixDLCMenu = Config.Bind<bool>("General", "FixDLCMenu", true, "Fixes the DLC menu in the debug menu so that it properly enables/disables DLC costumes.");
             Log__Init.enableLog = configEnableLog.Value;
-            Game__DLCCheck.fixDLCMenu = configFixDLCMenu.Value;
+            //ame__DLCCheck.fixDLCMenu = configFixDLCMenu.Value;
 
             var harmony = new Harmony("debug_menu_lv");
             harmony.PatchAll();
@@ -52,7 +52,7 @@ namespace DebugMenuLV
     [HarmonyPatch(typeof(Game), "DLCCheck")]
     public class Game__DLCCheck
     {
-        public static bool fixDLCMenu = false;
+        public static bool fixDLCMenu = true;
 
         [HarmonyPostfix]
         public static void Prefix(ref bool __runOriginal)
